@@ -1,4 +1,4 @@
-import { FLOOR_HEIGHT, JUMP_FORCE } from "../constants";
+import { FLOOR_HEIGHT, JUMP_FORCE, SPEED } from "../constants";
 import createScoreLable from "../sceneElements";
 export default function createSceneGame(props: GameProperties) {
   gravity(2400);
@@ -45,8 +45,8 @@ export default function createSceneGame(props: GameProperties) {
       pos(width(), height() - 48),
       origin("botleft"),
       color(255, 180, 255),
-      move(LEFT, 240),
-      "tree", // add a tag here
+      move(LEFT, SPEED),
+      "tree",
     ]);
     wait(rand(0.5, 1.5), () => {
       spawnTree();
