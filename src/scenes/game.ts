@@ -1,19 +1,23 @@
-import { FLOOR_HEIGHT, JUMP_FORCE, SPEED } from "../constants";
+import { FLOOR, PLAYER, TREE } from "../constants/elementNameConstants";
+import {
+  FLOOR_HEIGHT,
+  GRAVITY,
+  JUMP_FORCE,
+  SPEED,
+} from "../constants/gameConstants";
 import createScoreLable from "../sceneElements";
+
 export default function createSceneGame(props: GameProperties) {
-  gravity(2400);
+  gravity(GRAVITY);
 
   const scoreLabel = createScoreLable(props.score);
-  onKeyPress("f", () => {
-    fullscreen(!isFullscreen());
-  });
 
   onUpdate(() => {
     props.score++;
     scoreLabel.text = props.score.toString();
   });
 
-  const player = add([sprite("bean"), pos(80, 40), area(), body()]);
+  const player = add([sprite("bean"), pos(80, 40), area(), body(), PLAYER]);
   add([
     rect(width(), FLOOR_HEIGHT),
     pos(0, height()),
@@ -22,7 +26,7 @@ export default function createSceneGame(props: GameProperties) {
     area(),
     solid(),
     color(127, 200, 255),
-    "floor",
+    FLOOR,
   ]);
 
   onKeyPress("space", () => {
@@ -30,7 +34,7 @@ export default function createSceneGame(props: GameProperties) {
     player.jump(JUMP_FORCE);
   });
 
-  player.onCollide("tree", () => {
+  player.onCollide(TREE, () => {
     addKaboom(player.pos);
     shake(120);
     burp();
@@ -46,8 +50,9 @@ export default function createSceneGame(props: GameProperties) {
       origin("botleft"),
       color(255, 180, 255),
       move(LEFT, SPEED),
-      "tree",
+      TREE,
     ]);
+
     wait(rand(0.5, 1.5), () => {
       spawnTree();
     });

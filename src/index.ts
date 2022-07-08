@@ -7,10 +7,6 @@ kaboom({
   background: [0, 0, 255],
 });
 
-onKeyPress("f", () => {
-  fullscreen(!isFullscreen());
-});
-
 const gameProperties = { score: 0 };
 
 loadBean();

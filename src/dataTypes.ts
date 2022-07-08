@@ -1,3 +1,3 @@
-type GameProperties = {
+export type GameProperties = {
   score: number;
 };
